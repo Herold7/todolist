@@ -23,7 +23,7 @@ class Project
     private ?\DateTimeInterface $deadline = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $prority = null;
+    private ?int $priority = null;
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $color = null;
@@ -74,12 +74,12 @@ class Project
 
     public function getPrority(): ?int
     {
-        return $this->prority;
+        return $this->priority;
     }
 
-    public function setPrority(?int $prority): static
+    public function setPrority(?int $priority): static
     {
-        $this->prority = $prority;
+        $this->priority = $priority;
 
         return $this;
     }
