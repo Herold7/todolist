@@ -28,10 +28,16 @@ class AppFixtures extends Fixture
         // Création de projets
         $project1 = new Project();
         $project1->setTitle('Project A');
+        $project1->setDeadline(new \DateTime('2023-01-31'));
+        $project1->setUser($user1);
+        $project1->setStatus(true);
         $manager->persist($project1);
 
         $project2 = new Project();
         $project2->setTitle('Project B');
+        $project2->setDeadline(new \DateTime('2023-01-31'));
+        $project2->setStatus(true);
+        $project2->setUser($user2); // Assurez-vous d'associer le projet à un utilisateur différent si nécessaire
         $manager->persist($project2);
 
         // Création de tâches
