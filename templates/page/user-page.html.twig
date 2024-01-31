@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyTasks list{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <header>
+            <h2>MyTasks</h2>
+            <div class="user-menu">
+                <span>Pascal</span>
+                <a href="#">Logout</a>
+            </div>
+        </header>
+        <div class="sidebar" id="sidebar">
+                <li>Projets
+                    <ul>
+                        <li>Projet équipe</li>
+                        <li>Recherche stage</li>
+                        <li>Pot de départ</li>
+                    </ul>
+                </li>
+                ______________
+                <li>Archives
+                    <ul>
+                        <li>Réunion 28/12</li>
+                        <li>Rendu du TP</li>
+                        <li>Salon IT</li>
+                    </ul>
+                </li>
+            
+            <div id="resizer"></div>
+        </div>
+{% endblock %}
