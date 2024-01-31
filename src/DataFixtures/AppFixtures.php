@@ -7,60 +7,42 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
 use App\Entity\Project;
 use App\Entity\Task;
+use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create();
+
         // Création d'utilisateurs
-        $user1 = new User();
-        $user1->setNickname('john_doe');
-        $user1->setEmail('john.doe@example.com');
-        $user1->setPassword('password123');
-        $manager->persist($user1);
+        for ($i = 0; $i < 5; $i++) {
+            $user = new User();
+            $user->setNickname($faker->userName);
+            $user->setEmail($faker->email);
+            $user->setPassword($faker->password);
+            $manager->persist($user);
 
-        $user2 = new User();
-        $user2->setNickname('jane_smith');
-        $user2->setEmail('jane.smith@example.com');
-        $user2->setPassword('securepass');
-        $manager->persist($user2);
+            // Création de projets pour chaque utilisateur
+            for ($j = 0; $j < 3; $j++) {
+                $project = new Project();
+                $project->setTitle($faker->sentence);
+                $project->setDeadline($faker->dateTimeBetween('now', '+1 year'));
+                $project->setStatus($faker->boolean);
+                $project->setUser($user);
+                $manager->persist($project);
 
-        // Création de projets
-        $project1 = new Project();
-        $project1->setTitle('Project A');
-        $project1->setDeadline(new \DateTime('2023-01-31'));
-        $project1->setUser($user1);
-        $project1->setStatus(true);
-        $manager->persist($project1);
-
-        $project2 = new Project();
-        $project2->setTitle('Project B');
-        $project2->setDeadline(new \DateTime('2023-01-31'));
-        $project2->setStatus(true);
-        $project2->setUser($user2); // Assurez-vous d'associer le projet à un utilisateur différent si nécessaire
-        $manager->persist($project2);
-
-        // Création de tâches
-        $task1 = new Task();
-        $task1->setTitle('Task 1');
-        $task1->setDeadline(new \DateTime('2023-01-31'));
-        $task1->setPriority(2);
-        $task1->setProject($project1);
-        $manager->persist($task1);
-
-        $task2 = new Task();
-        $task2->setTitle('Task 2');
-        $task2->setDeadline(new \DateTime('2023-02-15'));
-        $task2->setPriority(1);
-        $task2->setProject($project1);
-        $manager->persist($task2);
-
-        $task3 = new Task();
-        $task3->setTitle('Task 3');
-        $task3->setDeadline(new \DateTime('2023-03-10'));
-        $task3->setPriority(3);
-        $task3->setProject($project2);
-        $manager->persist($task3);
+                // Création de tâches pour chaque projet
+                for ($k = 0; $k < 5; $k++) {
+                    $task = new Task();
+                    $task->setTitle($faker->sentence);
+                    $task->setDeadline($faker->dateTimeBetween('now', '+3 months'));
+                    $task->setPriority($faker->numberBetween(1, 5));
+                    $task->setProject($project);
+                    $manager->persist($task);
+                }
+            }
+        }
 
         $manager->flush();
     }
