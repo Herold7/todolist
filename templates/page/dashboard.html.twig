@@ -1,0 +1,34 @@
+{# templates/dashboard/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Welcome, {{ user.nickname }}!</h1>
+
+    <h2>Your Projects</h2>
+    <ul>
+        {% for project in user.projects %}
+            <li>
+                {{ project.title }}
+                <a href="{{ path('app_project_edit', {'id': project.id}) }}">Edit</a>
+                <a href="{{ path('app_project_delete', {'id': project.id}) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Your Tasks</h2>
+    <ul>
+        {% for task in user.tasks %}
+            <li>
+                {{ task.title }}
+                <a href="{{ path('app_task_edit', {'id': task.id}) }}">Edit</a>
+                <a href="{{ path('app_task_delete', {'id': task.id}) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_project_create') }}">Add New Project</a>
+    <a href="{{ path('app_task_create') }}">Add New Task</a>
+{% endblock %}

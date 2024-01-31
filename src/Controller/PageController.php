@@ -23,5 +23,12 @@ class PageController extends AbstractController
             'controller_name' => 'PageController',
         ]);
     }
+    #[Route('/dashboard', name: 'app_dashboard', methods:['GET'])]
+    public function dashboard(): Response
+    {
+        return $this->render('page/dashboard.html.twig', [
+            'controller_name' => 'PageController',
+        ]);
+    }
 
 }
