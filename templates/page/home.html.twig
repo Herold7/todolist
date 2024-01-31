@@ -1,0 +1,43 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">TODO list</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto justify-content-center">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('app_home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Welcome, {{ app.user.nickname }}!</h1>
+        <p>Your user ID: {{ app.user.id }}</p>
+        <p>Your email: {{ app.user.email }}</p>
+        {# Add any other user information you want to display #}
+
+         <h2>Your Projects:</h2>
+        {% if app.user.projects is not empty %}
+            <ul>
+                {% for project in app.user.projects %}
+                    <li>{{ project.title }} - Deadline: {{ project.deadline|date('Y-m-d') }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have no projects yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}
