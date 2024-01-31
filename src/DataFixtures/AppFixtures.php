@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
             $user = new User();
             $user->setNickname($faker->userName);
             $user->setEmail($faker->email);
-            $user->setPassword($faker->password);
+            $user->setPassword('$2y$13$UUUQRE1qcscUy27Y/tls3.Gp.EsvKfwAJ1aCkFkgJqbQMx4PhesKi');
             $manager->persist($user);
 
             // Création de projets pour chaque utilisateur
