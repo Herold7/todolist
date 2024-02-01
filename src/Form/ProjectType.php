@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,15 +16,16 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('deadline')
+            ->add('deadline', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('priority')
             ->add('color')
             ->add('status')
             ->add('user', EntityType::class, [
                 'class' => User::class,
-'choice_label' => 'id',
-            ])
-        ;
+                'choice_label' => 'email', 
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
