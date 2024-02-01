@@ -5,11 +5,11 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-    <h1>Welcome, {{ user.nickname }}!</h1>
+    <h1>Welcome, {{ app.user.nickname }}!</h1>
 
     <h2>Your Projects</h2>
     <ul>
-        {% for project in user.projects %}
+        {% for project in app.user.projects %}
             <li>
                 {{ project.title }}
                 <a href="{{ path('app_project_edit', {'id': project.id}) }}">Edit</a>
@@ -20,7 +20,7 @@
 
     <h2>Your Tasks</h2>
     <ul>
-        {% for task in user.tasks %}
+        {% for task in app.user.tasks %}
             <li>
                 {{ task.title }}
                 <a href="{{ path('app_task_edit', {'id': task.id}) }}">Edit</a>
