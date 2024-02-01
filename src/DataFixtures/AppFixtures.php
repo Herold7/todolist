@@ -28,6 +28,7 @@ class AppFixtures extends Fixture
                 $project = new Project();
                 $project->setTitle($faker->sentence);
                 $project->setDeadline($faker->dateTimeBetween('now', '+1 year'));
+                $project->setPriority($faker->numberBetween(1, 5));
                 $project->setStatus($faker->boolean);
                 $project->setUser($user);
                 $manager->persist($project);
