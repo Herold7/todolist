@@ -39,6 +39,7 @@ class AppFixtures extends Fixture
                     $task->setDeadline($faker->dateTimeBetween('now', '+3 months'));
                     $task->setPriority($faker->numberBetween(1, 5));
                     $task->setProject($project);
+                    $task->setUser($user);
                     $manager->persist($task);
                 }
             }
