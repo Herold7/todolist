@@ -14,6 +14,12 @@ class Task
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 2,
+        max: 80,
+        minMessage: 'Your title must be at least {{ limit }} characters long',
+        maxMessage: 'Your title cannot be longer than {{ limit }} characters',
+    )]
     #[ORM\Column(length: 80)]
     private ?string $title = null;
 
