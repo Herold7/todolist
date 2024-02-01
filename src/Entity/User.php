@@ -20,6 +20,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'The email "{{ value }}" is not a valid email. Try again.',
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -29,6 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+        message: 'Your password must contain : at least 1 uppercase letter, 1 lowercase letter, 1 number, at least 1 special character, at least 8 characters'
+    )]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Project::class, orphanRemoval: true)]
@@ -37,6 +44,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[Assert\Length(
+        min: 2,
+        max: 80,
+        minMessage: 'Your nickname must be at least {{ limit }} characters long',
+        maxMessage: 'Your nickname cannot be longer than {{ limit }} characters',
+    )]
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $nickname = null;
 
