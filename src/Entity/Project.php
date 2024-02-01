@@ -17,6 +17,9 @@ class Project
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Assert\NotBlank(
+        message: 'You should enter a title.'
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
