@@ -1,34 +1,79 @@
-{# templates/dashboard/index.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-    <h1>Welcome, {{ app.user.nickname }}!</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Your Todo App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <h2>Your Projects</h2>
-    <ul>
-        {% for project in app.user.projects %}
-            <li>
-                {{ project.title }}
-                <a href="{{ path('app_project_edit', {'id': project.id}) }}">Edit</a>
-                <a href="{{ path('app_project_delete', {'id': project.id}) }}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <span data-feather="home"></span>
+                                Dashboard <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file"></span>
+                                Projects
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="check-square"></span>
+                                Tasks
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-    <h2>Your Tasks</h2>
-    <ul>
-        {% for task in app.user.tasks %}
-            <li>
-                {{ task.title }}
-                <a href="{{ path('app_task_edit', {'id': task.id}) }}">Edit</a>
-                <a href="{{ path('app_task_delete', {'id': task.id}) }}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
+            <!-- Main Content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h1>Welcome, {{ app.user.nickname }}!</h1>
 
-    <a href="{{ path('app_project_create') }}">Add New Project</a>
-    <a href="{{ path('app_task_create') }}">Add New Task</a>
+                <h2>Your Projects <a href="{{ path('app_project_new') }}" class="btn btn-primary">Add New Project</a></h2>
+                {{ dump(app.user.projects.owner.tasks) }}
+                <ul>
+                    {% for project in app.user.projects %}
+                        <li>
+                            {{ project.title }}
+                            <a href="{{ path('app_project_edit', {'id': project.id}) }}">Edit</a>
+                            <a href="{{ path('app_project_delete', {'id': project.id}) }}">Delete</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <h2>Your Tasks<a href="{{ path('app_task_new') }}" class="btn btn-success">Add New Task</a></h2>
+                <ul>
+                    {% for task in app.user.projects.owner.tasks %}
+                        <li>
+                            {{ task.title }}
+                            <a href="{{ path('app_task_edit', {'id': task.id}) }}">Edit</a>
+                            <a href="{{ path('app_task_delete', {'id': task.id}) }}">Delete</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                
+            </main>
+        </div>
+    </div>
 {% endblock %}
