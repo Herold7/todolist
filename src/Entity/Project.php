@@ -72,12 +72,12 @@ class Project
         return $this;
     }
 
-    public function getPrority(): ?int
+    public function getPriority(): ?int
     {
         return $this->priority;
     }
 
-    public function setPrority(?int $priority): static
+    public function setPriority(?int $priority): static
     {
         $this->priority = $priority;
 

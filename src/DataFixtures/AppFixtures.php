@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
             $user = new User();
             $user->setNickname($faker->userName);
             $user->setEmail($faker->email);
-            $user->setPassword('$2y$13$UUUQRE1qcscUy27Y/tls3.Gp.EsvKfwAJ1aCkFkgJqbQMx4PhesKi');
+            $user->setPassword('$2y$13$hOu87aZiVilbIPAECI7jm.uKEPQzQPCy.mCi9il.GAxEejbd5HEwm');
             $manager->persist($user);
 
             // Création de projets pour chaque utilisateur
@@ -28,6 +28,7 @@ class AppFixtures extends Fixture
                 $project = new Project();
                 $project->setTitle($faker->sentence);
                 $project->setDeadline($faker->dateTimeBetween('now', '+1 year'));
+                $project->setPriority($faker->numberBetween(1, 5));
                 $project->setStatus($faker->boolean);
                 $project->setUser($user);
                 $manager->persist($project);
@@ -39,6 +40,7 @@ class AppFixtures extends Fixture
                     $task->setDeadline($faker->dateTimeBetween('now', '+3 months'));
                     $task->setPriority($faker->numberBetween(1, 5));
                     $task->setProject($project);
+                    $task->setUser($user);
                     $manager->persist($task);
                 }
             }
