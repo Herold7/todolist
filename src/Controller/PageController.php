@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,16 @@ class PageController extends AbstractController
     #[Route('/dashboard', name: 'app_dashboard', methods:['GET'])]
     public function dashboard(): Response
     {
+        return $this->render('page/dashboard.html.twig', [
+            'controller_name' => 'PageController',
+        ]);
+    }
+    #[Route('/project/{id}', name: 'show_project', methods:['GET'])]
+    public function showProject(
+        Project $project
+    ): Response
+    {
+       dd($project);
         return $this->render('page/dashboard.html.twig', [
             'controller_name' => 'PageController',
         ]);
