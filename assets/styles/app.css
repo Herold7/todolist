@@ -162,4 +162,27 @@ header {
 }
 
 
+.task {
+    display:flex;
+    gap: 1rem;
+    align-items: end;
+}
 
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+td.editable {
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+}

@@ -44,7 +44,7 @@
                         
                         <ul class="list-unstyled">
                             {% for task in project.tasks %}
-                                <li class="mb-3">
+                                <li class="task">
                                     <h4>{{ task.title }}</h4>
                                     <p>{{ task.description }}</p>
                                     <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-info">Edit Task</a>

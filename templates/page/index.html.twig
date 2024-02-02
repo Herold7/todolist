@@ -21,11 +21,137 @@
 
         </div>
 
-        <div class="main" id="main">[liste des tâches]</div>
+        <div class="main" id="main">[liste des tâches]
+        <table>
+            <tr>
+                <td class="editable" id="cell1">Cliquez pour éditer</td>
+                <td class="editable" id="cell2">Cliquez pour éditer</td>
+                <td class="editable" id="cell3">Cliquez pour éditer</td>
+                <td class="editable" id="cell4">Cliquez pour éditer</td>
+                <td class="editable" id="cell5">Cliquez pour éditer</td>
+                <td class="editable" id="cell6">Cliquez pour éditer</td>
+                <td class="editable" id="cell7">Cliquez pour éditer</td>
+            </tr>
+        </table>
+
+
+
+        </div>
 
     </div>
 
-    <script src="../../assets/userpage.js"></script>
+
+    <script>
+        const cells = document.querySelectorAll('.editable');
+
+        cells.forEach(cell => {
+            cell.addEventListener('dblclick', () => {
+                const oldValue = cell.innerText;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = oldValue;
+                input.addEventListener('blur', () => {
+                    cell.innerText = input.value;
+                });
+                cell.innerText = '';
+                cell.appendChild(input);
+                input.focus();
+            });
+        });
+
+
+                // Code pour le déplacement du séparateur
+
+        const sidebar = document.getElementById('sidebar');
+
+        const main = document.getElementById('main');
+
+        let isResizing = false;
+
+
+
+        document.addEventListener('mousemove', function(event) {
+
+            if (isResizing) {
+
+                sidebar.style.width = event.clientX + 'px';
+
+                main.style.width = `calc(100% - ${event.clientX}px)`;
+
+            }
+
+        });
+
+
+
+        sidebar.addEventListener('mousedown', function(event) {
+
+            isResizing = true;
+
+        });
+
+
+
+        document.addEventListener('mouseup', function(event) {
+
+            isResizing = false;
+
+        });
+
+
+
+
+
+        // Code pour le déplacement du séparateur horizontal
+
+        const splitter = document.createElement('div');
+
+        splitter.className = 'splitter';
+
+        sidebar.appendChild(splitter);
+
+
+
+        let isResizingVertically = false;
+
+
+
+        splitter.addEventListener('mousedown', function(event) {
+
+            isResizingVertically = true;
+
+        });
+
+
+
+        document.addEventListener('mousemove', function(event) {
+
+            if (isResizingVertically) {
+
+                const sidebarRect = sidebar.getBoundingClientRect();
+
+                const mouseY = event.clientY;
+
+                const sidebarHeight = mouseY - sidebarRect.top;
+
+                sidebar.style.height = sidebarHeight + 'px';
+
+                main.style.height = `calc(100% - ${sidebarHeight}px)`;
+
+            }
+
+        });
+
+
+
+        document.addEventListener('mouseup', function(event) {
+
+            isResizingVertically = false;
+
+        });
+
+
+    </script>
 
 
 {% endblock %}
