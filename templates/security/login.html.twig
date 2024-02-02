@@ -23,6 +23,9 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
+    <div class="mb-3">
+        Si vous n'avez pas de compte, <a href="{{ path('app_register') }}">Créez un compte</a>
+    </div>
 
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
