@@ -36,9 +36,8 @@ class PageController extends AbstractController
         Project $project
     ): Response
     {
-       dd($project);
-        return $this->render('page/dashboard.html.twig', [
-            'controller_name' => 'PageController',
+        return $this->render('project/showproject.html.twig', [
+            'project' => $project,
         ]);
     }
 
