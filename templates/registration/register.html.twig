@@ -31,6 +31,9 @@
                         {{ form_row(registrationForm.agreeTerms, {'label_attr': {'class': 'form-check-label'}, 'attr': {'class': 'form-check-input'}}) }}
                         <small class="form-text text-danger">{{ form_errors(registrationForm.agreeTerms) }}</small>
                     </div>
+                    <div class="mb-3">
+                        Si vous avez déja un compte, <a href="{{ path('app_login') }}">Connectez-vous</a>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Register</button>
                 {{ form_end(registrationForm) }}
