@@ -12,7 +12,7 @@ class PageController extends AbstractController
     public function index(): Response
     {
         // Redirection vers la route 'app_home'
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_register');
     }
 
     #[Route('/home', name: 'app_home', methods:['GET'])]
